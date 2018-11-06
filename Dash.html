@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ProjE</title>
+<script type="text/javascript" src="res/e.js"></script>
+
+</head>
+<body onload="init();">
+
+    <div id="dashDiv" class="view">
+        <h1>Dashboard</h1>
+        <ul>
+            <li><a href='javascript:show("primeDiv");'>Prime Number Service</a></li>
+            <li><a href='javascript:show("sisDiv");'>SIS Report Generator</a></li>
+        </ul>   
+    </div>
+   
+    <div id="primeDiv" class="view">
+   
+        <h1>Prime Number Service</h1>
+        <a href="Dash.do">Dashboard</a>
+   
+        <form id="primeForm" onsubmit="prime(this); return false;">
+       
+            <input type="text" id="min" placeholder="Larger than..."/><br/>
+            <input type="text" id="max" placeholder="But not Larger than..."/><br/>
+           
+            <input type="hidden" id="prv"/>
+            <input type="hidden" id="opt"/>
+           
+           
+            <input type="submit" onclick="findClicked();" value="Find"/>
+            <input type="submit" onclick="nextClicked();" value="Next"/>
+           
+        </form>
+       
+        <div id="primeResult"> </div>
+    </div>
+   
+    <div id="sisDiv" class="view">
+       
+        <h1>SIS Report Generator</h1>
+        <a href="Dash.do">Dashboard</a>
+       
+        <form id="sisForm" onsubmit="sis(this); return false;">
+       
+            <input type="text" id="prefix" placeholder="Name prefix"/><br/>
+            <input type="text" id="gpa" placeholder="Minimum GPA"/><br/>
+           
+            <select id="sortBy" name="sortBy">
+
+                <option selected="any" value="NONE">Select One:</option>
+                <option value="SURNAME">Last Name</option>
+                <option value="MAJOR">Major</option>
+                <option value="COURSES">Number of Courses</option>
+                <option value="GPA">GPA</option>
+               
+            </select>
+           
+            <input type="submit" value="Generate Report"/>
+
+        </form>   
+       
+        <div id="sisResult"> </div>
+    </div>
+
+</body>
+</html>
