@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigInteger;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -11,6 +12,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.google.gson.Gson;
 
 import java.lang.Math;
 
@@ -69,12 +72,19 @@ public class Engine
 	
 	public String doSis(String prefix, String minGPA, String sortBy)throws Exception{
 	       
-	        String prfx =rmvTroubleMaker(prefix),
+	        /*String prfx =rmvTroubleMaker(prefix),
 	                mngp = rmvTroubleMaker(minGPA),
-	                srtby = rmvTroubleMaker(sortBy);
+	                srtby = rmvTroubleMaker(sortBy);*/
 	       
 	        StudentDAO dao = new StudentDAO();
-	        List<StudentBean> beans  = dao.retrieve(prfx, mngp, srtby);
+	        
+	        //List<StudentBean> beans  = dao.retrieve(prfx, mngp, srtby);
+	        List<StudentBean> beans  = dao.retrieve(prefix, minGPA, sortBy);
+			//Table src = new Table(beans);
+			Gson json = new Gson();
+			String table = json.toJson(beans, ArrayList.class);
+			
+	        /*List<StudentBean> beans  = dao.retrieve(prfx, mngp, srtby);
 	        String table = "";
 	       
 	        table+= "<h3 style='text-align:left;color:blue;'>Sorted By: "+ srtby.toUpperCase() + "</h3><br/>";
@@ -89,8 +99,8 @@ public class Engine
 	            table+= "<td style=\\\"padding: 6px;\\\">"+ b.getGpa() + "</td>";
 	            table+= "</tr>";
 	        }
-	        table+= "</table>";
-	       
+	        table+= "</table>";*/
+			//System.out.println(table);
 	        return table;
 	}
 	
@@ -98,6 +108,7 @@ public class Engine
 	       
 	        return input.replace(";", "").replace("\"", "").replace("+", "").replace("=","").trim();
 	    }
+	
 	
 	
 	

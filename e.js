@@ -58,6 +58,7 @@ function primeResult(request)
 
 function sis(f)
 {
+	//alert("Hello");
     let pfx = f.elements["prefix"].value;
     let gpa = f.elements["gpa"].value;
     let opt = f.elements["sortBy"].value;
@@ -66,30 +67,59 @@ function sis(f)
     doSimpleAjax("Sis.do", qs, sisResult);
 }
 
+	
 function sisResult(request)
 {
-   
-    if ((request.readyState == 4) && (request.status == 200))
-    {
-        let resp = JSON.parse(request.responseText);
-
-        let html = "";
-        if (resp.status == 1)
-        {
-            html += resp.result;
-        }
-        else
-        {
-            html += "<p style='color:red'>Error: " + resp.error + "</p>";
-        }
-        document.getElementById("sisResult").innerHTML = html;
-    }
+	//alert("I'm in sisresult");
+		
+	if ((request.readyState == 4) && (request.status == 200)) 
+	{
+		//alert("hiiii");
+		let resp = JSON.parse(request.responseText);
+		
+		//alert("hiiii");
+		
+		let html = "";
+		//alert("hello");
+		if (resp.status == 1)
+		{
+			html += "<h3 style=\"color: blue;\">SORT BY: " + document.getElementById("sortBy").value + "</h3>"
+			html += "<table style=\"margin:1;\" border=\"1\">";
+			
+			html += "<tr>";
+			html += "<th>NAME</th>";
+			html += "<th>MAJOR</th>";
+			html += "<th>COURSES</th>";
+			html += "<th>GPA</th>";
+			html += "</tr>";
+			
+			for(var i = 0; i < resp.result.length; i++){
+					
+				html += "<tr>";
+				html += "<td style=\"padding: 6px;\">" + resp.result[i].name + "</td>";
+				html += "<td style=\"padding: 6px;\">" + resp.result[i].major + "</td>";
+				html += "<td style=\"padding: 6px;\">" + resp.result[i].courses + "</td>";
+				html += "<td style=\"padding: 6px;\">" + resp.result[i].gpa + "</td>";
+				html += "<tr>"
+			}
+				
+			html+= "</table>";
+				
+		}
+		else
+		{
+			html += "<p style='color:red'>Error: " + resp.error + "</p>";
+		}
+		
+		document.getElementById("sisResult").innerHTML = html;
+	}
    
 }
 
 
 function doSimpleAjax(address, data, handler)
 {
+	//alert("ajax");
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {handler(request);};
     request.open("GET", (address + "?" + data), true);
@@ -111,4 +141,5 @@ function nextClicked(){
     document.getElementById("min").value = res.result;
    
 }
+
 

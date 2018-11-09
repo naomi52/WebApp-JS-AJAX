@@ -89,9 +89,11 @@ public class StudentDAO {
         
         for(int i=0; i<myList.size(); i++) {
         	StudentBean myBean = myList.get(i);
+        	//System.out.println(myBean);
         }
         
         return myList;
+        
         	
         }
 

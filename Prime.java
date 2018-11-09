@@ -40,11 +40,11 @@ public class Prime extends HttpServlet {
         String max = request.getParameter("max");
         String prv = request.getParameter("prv");
         String opt = request.getParameter("opt");
-       
+        /*
         System.out.println("min= " + min);
         System.out.println("max= " +max);
         System.out.println("prv= " +prv);
-        System.out.println("opt= " +opt);
+        System.out.println("opt= " +opt);*/
        
         Writer out = response.getWriter();
         response.setContentType("text/json");

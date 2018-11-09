@@ -44,7 +44,7 @@ public class Sis extends HttpServlet {
        
         try {
            
-            String ans = "\"" + engine.doSis(prefix, gpa, sortBy) + "\"";
+            String ans = engine.doSis(prefix, gpa, sortBy); //+ "\"";
             //
             out.write("{\"status\":1, \"result\":" + ans + "}");
            
